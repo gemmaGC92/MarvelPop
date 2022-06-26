@@ -23,7 +23,8 @@ class MainTableViewCell: UITableViewCell {
     
     func setupViews() {
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.font = UIFont.systemFont(ofSize: 18)
+        title.font = UIFont.systemFont(ofSize: 16)
+        title.numberOfLines = 0
         
         contentView.addSubview(title)
         
@@ -38,8 +39,8 @@ class MainTableViewCell: UITableViewCell {
         separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
     }
     
-    public func bind(title: String) {
+    public func bind(title: String, showDisclosure: Bool = true) {
         self.title.text = title
-        self.accessoryType = .disclosureIndicator
+        self.accessoryType = showDisclosure ? .disclosureIndicator : .none
     }
 }

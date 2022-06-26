@@ -10,6 +10,8 @@ import Foundation
 class CharactersViewModel {
     let provider: CharactersDataProvider
     weak var output: CharactersViewOutput?
+    weak var router: CharactersRouter?
+    
     var marvelCharacters: [MarvelCharacter] = []
     
     private var state: CharactersViewState = .loading {
@@ -30,6 +32,11 @@ class CharactersViewModel {
 }
 
 extension CharactersViewModel: CharactersViewInput {
+    func didSelect(_ indexPath: IndexPath) {
+        guard indexPath.row < marvelCharacters.count else { return }
+        router?.showDetails(marvelCharacters[indexPath.row])
+    }
+    
     func willAppear() {
         state = .loading
         provider.getCharacters { [weak self] result in

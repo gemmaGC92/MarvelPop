@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1719C1462868CDCA0093915F /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1719C1452868CDCA0093915F /* CharacterDetailViewController.swift */; };
+		1719C1482868CDE10093915F /* CharacterDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1719C1472868CDE10093915F /* CharacterDetailViewModel.swift */; };
+		1719C14C2868CE090093915F /* CharacterDetailContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1719C14B2868CE090093915F /* CharacterDetailContracts.swift */; };
 		17CFD7AA285B600B0008D9B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD7A9285B600B0008D9B8 /* AppDelegate.swift */; };
 		17CFD7AC285B600B0008D9B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD7AB285B600B0008D9B8 /* SceneDelegate.swift */; };
 		17CFD7AE285B600B0008D9B8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD7AD285B600B0008D9B8 /* HomeViewController.swift */; };
@@ -53,6 +56,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1719C1452868CDCA0093915F /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
+		1719C1472868CDE10093915F /* CharacterDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewModel.swift; sourceTree = "<group>"; };
+		1719C14B2868CE090093915F /* CharacterDetailContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailContracts.swift; sourceTree = "<group>"; };
 		17CFD7A6285B600B0008D9B8 /* MarvelPop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelPop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17CFD7A9285B600B0008D9B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17CFD7AB285B600B0008D9B8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +116,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1719C1442868CDB40093915F /* CharacterDetail */ = {
+			isa = PBXGroup;
+			children = (
+				1719C1452868CDCA0093915F /* CharacterDetailViewController.swift */,
+				1719C1472868CDE10093915F /* CharacterDetailViewModel.swift */,
+				1719C14B2868CE090093915F /* CharacterDetailContracts.swift */,
+			);
+			path = CharacterDetail;
+			sourceTree = "<group>";
+		};
 		17CFD79D285B600B0008D9B8 = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +221,7 @@
 		17CFD7FB285CD6DA0008D9B8 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				1719C1442868CDB40093915F /* CharacterDetail */,
 				17CFD80D285E32120008D9B8 /* Characters */,
 				17CFD803285E08E50008D9B8 /* Home */,
 				17CFD7FC285CD6E30008D9B8 /* Main */,
@@ -393,12 +410,15 @@
 				17CFD80A285E1FB10008D9B8 /* UITableView+Extensions.swift in Sources */,
 				17CFD7F8285CD1020008D9B8 /* AppConfiguration.swift in Sources */,
 				17CFD80F285E32230008D9B8 /* CharactersViewController.swift in Sources */,
+				1719C14C2868CE090093915F /* CharacterDetailContracts.swift in Sources */,
 				17CFD819285E387B0008D9B8 /* CharactersContracts.swift in Sources */,
 				17CFD813285E32BA0008D9B8 /* CharactersDataProvider.swift in Sources */,
 				17CFD7EE285CCAA40008D9B8 /* APIClient.swift in Sources */,
+				1719C1482868CDE10093915F /* CharacterDetailViewModel.swift in Sources */,
 				17CFD81B285E39F70008D9B8 /* CharacterTableViewCell.swift in Sources */,
 				17CFD807285E093D0008D9B8 /* HomeContracts.swift in Sources */,
 				17CFD800285CD90A0008D9B8 /* IdentityProvider.swift in Sources */,
+				1719C1462868CDCA0093915F /* CharacterDetailViewController.swift in Sources */,
 				17CFD7AE285B600B0008D9B8 /* HomeViewController.swift in Sources */,
 				17CFD7AA285B600B0008D9B8 /* AppDelegate.swift in Sources */,
 				17CFD7FE285CD6ED0008D9B8 /* MainCoordinator.swift in Sources */,

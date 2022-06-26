@@ -15,13 +15,31 @@ struct CharacterDataWrapperDTO: Decodable {
 }
 
 struct CharacterDataContainerDTO: Decodable {
-    var results: [CharacterDTO?]
+    var results: [CharacterDTO]?
 }
 
 struct CharacterDTO: Decodable {
     var id: Int?
     var name: String?
     var description: String?
+    var thumbnail: ImageDTO?
+    var comics: ItemListDTO?
+    var stories: ItemListDTO?
+    var events: ItemListDTO?
+    var series: ItemListDTO?
+}
+
+struct ImageDTO: Decodable {
+    var path: String?
+    var `extension`: String?
+}
+
+struct ItemListDTO: Decodable {
+    var items: [ItemSummaryDTO]?
+}
+
+struct ItemSummaryDTO: Decodable {
+    var name: String?
 }
 
 struct GetCharactersRequest: JSONAPIRequest {

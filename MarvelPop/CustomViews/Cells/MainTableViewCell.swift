@@ -38,7 +38,7 @@ class MainTableViewCell: UITableViewCell {
         separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
     }
     
-    public func bind(title: String, subtitle: String) {
+    public func bind(title: String) {
         self.title.text = title
         self.accessoryType = .disclosureIndicator
     }

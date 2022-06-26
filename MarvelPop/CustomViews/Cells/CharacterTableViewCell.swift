@@ -24,17 +24,31 @@ class CharacterTableViewCell: UITableViewCell {
     }
     
     func setupViews() {
-        let stack = UIStackView(arrangedSubviews: [title, subtitle])
-        stack.axis = .vertical
-        [title, subtitle, stack].forEach {
+        title.font = UIFont.boldSystemFont(ofSize: 16)
+        subtitle.font = UIFont.systemFont(ofSize: 14)
+        subtitle.numberOfLines = 2
+        
+        [title, subtitle].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview($0)
         }
         
-        contentView.addSubview(stack)
+        NSLayoutConstraint.activate([
+            title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            
+            subtitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 4),
+            subtitle.leadingAnchor.constraint(equalTo: title.leadingAnchor),
+            subtitle.trailingAnchor.constraint(equalTo: title.trailingAnchor),
+            subtitle.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+        ])
+        
+        separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
     }
     
-    func bind(title: String, subtitle: String) {
+    func bind(title: String, subtitle: String?) {
         self.title.text = title
-        self.subtitle.text = subtitle
+        self.subtitle.text = subtitle != "" ? subtitle : nil
     }
 }

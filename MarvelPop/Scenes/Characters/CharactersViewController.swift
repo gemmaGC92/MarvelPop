@@ -12,6 +12,7 @@ class CharactersViewController: UIViewController {
     
     let loader = UIActivityIndicatorView(style: .medium)
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    var model: CharactersViewInput?
     
     var items: [MarvelCharacter] = [] {
         didSet {
@@ -25,6 +26,9 @@ class CharactersViewController: UIViewController {
         
         setupTableView()
         setupLoader()
+        model?.willAppear()
+        
+        navigationItem.title = "MARVEL CHARACTERS"
     }
     
     func setupLoader() {
@@ -42,7 +46,7 @@ class CharactersViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .clear
-        tableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.identifier)
+        tableView.register(CharacterTableViewCell.self, forCellReuseIdentifier: CharacterTableViewCell.identifier)
         
         view.addSubview(tableView)
         
@@ -57,11 +61,13 @@ class CharactersViewController: UIViewController {
 
 extension CharactersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier) as? CharacterTableViewCell else { return UITableViewCell() }
+        cell.bind(title: items[indexPath.row].name ?? "", subtitle: items[indexPath.row].description)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return items.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -80,8 +80,7 @@ extension HomeViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier) as? MainTableViewCell else { return UITableViewCell() }
         switch items[indexPath.row] {
         case .characters(let title), .creators(let title), .comics(let title), .stories(let title), .series(let title), .events(let title):
-            cell.bind(title: title, subtitle: "")
-            
+            cell.bind(title: title)
         }
         return cell
     }

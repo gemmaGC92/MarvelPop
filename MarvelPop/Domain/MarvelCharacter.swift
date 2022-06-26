@@ -8,11 +8,13 @@
 import Foundation
 
 struct MarvelCharacter {
+    var id: Int?
     var name: String?
     var description: String?
     
-    init(_ dto: CharacterDTO) {
-        self.name = dto.name
-        self.description = dto.description
+    init(_ dto: CharacterDTO?) {
+        self.name = dto?.name
+        self.description = dto?.description
+        self.id = dto?.id
     }
 }

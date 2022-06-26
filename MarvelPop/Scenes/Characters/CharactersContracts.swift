@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol CharactersViewInput {
+protocol CharactersViewInput: AnyObject {
     func willAppear()
 }
 
-protocol CharactersViewOutput {
+protocol CharactersViewOutput: AnyObject {
     func update(_ state: CharactersViewState)
 }
 

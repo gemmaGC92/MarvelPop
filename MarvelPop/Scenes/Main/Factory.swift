@@ -24,7 +24,8 @@ class Factory {
         let provider = CharactersDataProvider(client: client)
         let model = CharactersViewModel(provider)
         let vc = CharactersViewController()
-        
+        vc.model = model
+        model.output = vc
         return vc
     }
 }

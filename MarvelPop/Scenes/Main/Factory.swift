@@ -20,10 +20,19 @@ class Factory {
         return vc
     }
     
-    func characters(_ client: MarvelAPIClient) -> UIViewController {
+    func characters(_ client: MarvelAPIClient, router: CharactersRouter) -> UIViewController {
         let provider = CharactersDataProvider(client: client)
         let model = CharactersViewModel(provider)
         let vc = CharactersViewController()
+        vc.model = model
+        model.output = vc
+        model.router = router
+        return vc
+    }
+    
+    func characterDetails(_ item: MarvelCharacter) -> UIViewController {
+        let vc = CharacterDetailViewController()
+        let model = CharacterDetailViewModel(marvelCharacter: item)
         vc.model = model
         model.output = vc
         return vc

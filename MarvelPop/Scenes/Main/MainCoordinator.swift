@@ -29,7 +29,12 @@ class MainCoordinator {
     }
     
     func openCharactersList() {
-        let vc = factory.characters(client)
+        let vc = factory.characters(client, router: self)
+        navigator?.pushViewController(vc, animated: true)
+    }
+    
+    func openCharacterDetails(_ item: MarvelCharacter) {
+        let vc = factory.characterDetails(item)
         navigator?.pushViewController(vc, animated: true)
     }
 }
@@ -50,5 +55,11 @@ extension MainCoordinator: HomeViewRouter {
         case .stories(let string):
             break
         }
+    }
+}
+
+extension MainCoordinator: CharactersRouter {
+    func showDetails(_ item: MarvelCharacter) {
+        openCharacterDetails(item)
     }
 }

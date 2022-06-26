@@ -1,20 +1,19 @@
 //
-//  CharactersViewController.swift
+//  CharacterDetailViewController.swift
 //  MarvelPop
 //
-//  Created by Guiteras Cebrian, Gemma on 18/6/22.
+//  Created by Guiteras Cebrian, Gemma on 26/6/22.
 //
 
 import Foundation
 import UIKit
 
-class CharactersViewController: UIViewController {
-    
+class CharacterDetailViewController: UIViewController {
     let loader = UIActivityIndicatorView(style: .medium)
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
-    var model: CharactersViewInput?
+    var model: CharacterDetailViewInput?
     
-    var items: [MarvelCharacter] = [] {
+    var sections: [CharacterSections] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -27,8 +26,6 @@ class CharactersViewController: UIViewController {
         setupTableView()
         setupLoader()
         model?.willAppear()
-        
-        navigationItem.title = "MARVEL CHARACTERS"
     }
     
     func setupLoader() {
@@ -47,6 +44,7 @@ class CharactersViewController: UIViewController {
         tableView.delegate = self
         tableView.backgroundColor = .clear
         tableView.register(CharacterTableViewCell.self, forCellReuseIdentifier: CharacterTableViewCell.identifier)
+        tableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.identifier)
         
         view.addSubview(tableView)
         
@@ -59,39 +57,48 @@ class CharactersViewController: UIViewController {
     }
 }
 
-extension CharactersViewController: UITableViewDataSource {
+extension CharacterDetailViewController: UITableViewDelegate {
+    
+}
+
+extension CharacterDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier) as? CharacterTableViewCell else { return UITableViewCell() }
-        cell.bind(title: items[indexPath.row].name ?? "", subtitle: items[indexPath.row].description)
-        return cell
+        switch sections[indexPath.section] {
+        case .info(let model):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier) as? CharacterTableViewCell else { return UITableViewCell() }
+            cell.bind(title: model.title, subtitle: model.description, subtitleMultiline: true)
+            return cell
+        case .comics(let models):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier) as? MainTableViewCell else { return UITableViewCell() }
+            cell.bind(title: models.items?[indexPath.row].name ?? "", showDisclosure: false)
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        switch sections[section] {
+        case .info:
+            return 1
+        case .comics(let models):
+            return models.items?.count ?? 0
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        return sections.count
     }
 }
 
-extension CharactersViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        model?.didSelect(indexPath)
-    }
-}
-
-extension CharactersViewController: CharactersViewOutput {
-    func update(_ state: CharactersViewState) {
+extension CharacterDetailViewController: CharacterDetailViewOutput {
+    func update(_ state: CharacterDetailViewState) {
         if loader.isAnimating {
             loader.stopAnimating()
         }
-        
         switch state {
         case .loading:
             loader.startAnimating()
-        case .data(let items):
-            self.items = items
+        case .data(let characterSections):
+            self.sections = characterSections
         }
     }
 }

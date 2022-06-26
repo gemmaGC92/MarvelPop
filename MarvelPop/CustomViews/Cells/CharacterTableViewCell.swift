@@ -45,10 +45,15 @@ class CharacterTableViewCell: UITableViewCell {
         ])
         
         separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        selectionStyle = .none
     }
     
-    func bind(title: String, subtitle: String?) {
+    func bind(title: String, subtitle: String?, subtitleMultiline: Bool = false) {
         self.title.text = title
         self.subtitle.text = subtitle != "" ? subtitle : nil
+        
+        if subtitleMultiline {
+            self.subtitle.numberOfLines = 0
+        }
     }
 }

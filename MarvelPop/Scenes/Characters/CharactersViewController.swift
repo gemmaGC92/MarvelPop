@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class CharactersViewController: UIViewController {
-    let loader = UIActivityIndicatorView(style: .medium)
+    let loadAnimation = LottieWrapperView(named: "loading")
     let searchBar = UISearchBar(frame: .zero)
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     var model: CharactersViewInput?
@@ -32,12 +32,14 @@ class CharactersViewController: UIViewController {
     }
     
     func setupLoader() {
-        loader.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(loader)
+        loadAnimation.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loadAnimation)
         
         NSLayoutConstraint.activate([
-            loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            loadAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadAnimation.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loadAnimation.heightAnchor.constraint(equalToConstant: 200),
+            loadAnimation.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
     
@@ -103,13 +105,13 @@ extension CharactersViewController: UITableViewDelegate {
 
 extension CharactersViewController: CharactersViewOutput {
     func update(_ state: CharactersViewState) {
-        if loader.isAnimating {
-            loader.stopAnimating()
+        if loadAnimation.isPlaying {
+            loadAnimation.stop()
         }
         
         switch state {
         case .loading:
-            loader.startAnimating()
+            loadAnimation.start()
             tableView.isHidden = true
         case .data(let items), .search(let items):
             self.items = items

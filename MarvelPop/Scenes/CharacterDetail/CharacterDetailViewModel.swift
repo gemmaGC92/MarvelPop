@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct CharacterInfoData {
     var title: String
@@ -32,6 +33,7 @@ class CharacterDetailViewModel {
     
     init(marvelCharacter: MarvelCharacter) {
         self.marvelCharacter = marvelCharacter
+        fetchImage()
     }
     
     func buildData() {
@@ -46,6 +48,17 @@ class CharacterDetailViewModel {
         }
         
         state = .data(sections)
+    }
+    
+    func fetchImage() {
+        guard let url = marvelCharacter.thumbnailURL else { return }
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: url)
+            DispatchQueue.main.async {
+                guard let data = data, let image = UIImage(data: data) else { return }
+                self.output?.showImage(image)
+            }
+        }
     }
 }
 

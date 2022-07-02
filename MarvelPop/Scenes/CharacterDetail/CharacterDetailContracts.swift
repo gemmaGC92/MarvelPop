@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol CharacterDetailViewInput: AnyObject {
     func willAppear()
@@ -13,6 +14,7 @@ protocol CharacterDetailViewInput: AnyObject {
 
 protocol CharacterDetailViewOutput: AnyObject {
     func update(_ state: CharacterDetailViewState)
+    func showImage(_ img: UIImage)
 }
 
 enum CharacterDetailViewState {

@@ -53,7 +53,7 @@ extension CharactersViewModel: CharactersViewInput {
     func loadMoreData() {
         guard let paging = paging else { return }
         if paging.hasMoreData == true {
-            fetchCharacters(offset: paging.offset + 50)
+            fetchCharacters(offset: paging.offset + 20)
         }
     }
     

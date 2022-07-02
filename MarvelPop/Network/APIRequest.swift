@@ -52,7 +52,7 @@ public extension APIRequest {
         return [:]
     }
     
-    func getTimestamp() -> String {
+    private func getTimestamp() -> String {
         let date = Date()
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -60,7 +60,7 @@ public extension APIRequest {
         return timestamp
     }
 
-    func MD5(string: String) -> String {
+    private func MD5(string: String) -> String {
         let digest = Insecure.MD5.hash(data: string.data(using: .utf8) ?? Data())
 
         return digest.map {
@@ -69,13 +69,7 @@ public extension APIRequest {
     }
     
     func generateQueryItems() -> [URLQueryItem] {
-        let ts = getTimestamp()
-        let hash = MD5(string: ts + privateKey + publicKey)
-        return [
-            URLQueryItem(name: "ts", value: getTimestamp()),
-            URLQueryItem(name: "apikey", value: "c89204bb01e8bff368a2ca6fcb02d174"),
-            URLQueryItem(name: "hash", value: hash)
-        ]
+        return []
     }
     
     func generateURLrequest(_ baseURL: URL) -> URLRequest {

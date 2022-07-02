@@ -21,7 +21,14 @@ protocol CharactersRouter: AnyObject {
     func showDetails(_ item: MarvelCharacter)
 }
 
-enum CharactersViewState {
+enum CharactersViewState: Equatable {
+    static func == (lhs: CharactersViewState, rhs: CharactersViewState) -> Bool {
+        switch (lhs, rhs) {
+        case (.loading, .loading), (.data, .data): return true
+        default: return false
+        }
+    }
+    
     case loading
     case data([MarvelCharacter])
 }

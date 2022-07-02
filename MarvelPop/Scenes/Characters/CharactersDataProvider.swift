@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct CharacterDataWrapperDTO: Decodable {
+struct CharacterDataWrapperDTO: Codable {
     var code: Int?
     var status: String?
     var copyright: String?
     var data: CharacterDataContainerDTO?
 }
 
-struct CharacterDataContainerDTO: Decodable {
+struct CharacterDataContainerDTO: Codable {
     var offset: Int?
     var limit: Int?
     var total: Int?
@@ -22,7 +22,7 @@ struct CharacterDataContainerDTO: Decodable {
     var results: [CharacterDTO]?
 }
 
-struct CharacterDTO: Decodable {
+struct CharacterDTO: Codable {
     var id: Int?
     var name: String?
     var description: String?
@@ -33,20 +33,20 @@ struct CharacterDTO: Decodable {
     var series: ItemListDTO?
 }
 
-struct ImageDTO: Decodable {
+struct ImageDTO: Codable {
     var path: String?
     var `extension`: String?
 }
 
-struct ItemListDTO: Decodable {
+struct ItemListDTO: Codable {
     var items: [ItemSummaryDTO]?
 }
 
-struct ItemSummaryDTO: Decodable {
+struct ItemSummaryDTO: Codable {
     var name: String?
 }
 
-struct Paging {
+struct Paging: Codable {
     var count: Int
     var offset: Int
     var total: Int
@@ -71,7 +71,6 @@ struct GetCharactersRequest: JSONAPIRequest {
     init(offset: Int? = nil) {
         self.offset = offset
         self.resourcePath = "v1/public/characters"
-        
     }
     
     func generateQueryItems() -> [URLQueryItem] {
@@ -84,9 +83,9 @@ struct GetCharactersRequest: JSONAPIRequest {
 }
 
 class CharactersDataProvider {
-    let client: MarvelAPIClient
+    let client: APIClient
     
-    init(client: MarvelAPIClient) {
+    init(client: APIClient) {
         self.client = client
     }
     

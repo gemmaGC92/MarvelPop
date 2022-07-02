@@ -66,19 +66,27 @@ struct GetCharactersRequest: JSONAPIRequest {
     var resourcePath: String
     var decoder: JSONDecoder = JSONDecoder()
     var method: HTTPMethod = .get
-    var offset: Int?
     
-    init(offset: Int? = nil) {
+    var offset: Int?
+    var filter: String?
+    
+    init(offset: Int? = nil, filter: String? = nil) {
         self.offset = offset
+        self.filter = filter
         self.resourcePath = "v1/public/characters"
     }
     
     func generateQueryItems() -> [URLQueryItem] {
-        guard let offset = offset else {
-            return []
+        var items: [URLQueryItem] = []
+        if let offset = offset {
+            items.append(URLQueryItem(name: "offset", value: "\(offset)"))
         }
-
-        return [URLQueryItem(name: "offset", value: "\(offset)")]
+        
+        if let filter = filter, !filter.isEmpty {
+            items.append(URLQueryItem(name: "nameStartsWith", value: "\(filter)"))
+        }
+        
+        return items
     }
 }
 
@@ -89,8 +97,13 @@ class CharactersDataProvider {
         self.client = client
     }
     
-    func getCharacters(offset: Int?, completion: @escaping(Result<CharacterDataWrapperDTO, Error>) -> Void) {
-        let request = GetCharactersRequest(offset: offset)
+    func getCharacters(offset: Int?, filter: String? = nil, completion: @escaping(Result<CharacterDataWrapperDTO, Error>) -> Void) {
+        let request = GetCharactersRequest(offset: offset, filter: filter)
+        client.send(request, completion: completion)
+    }
+    
+    func filterCharacters(_ filter: String, offset: Int?, completion: @escaping(Result<CharacterDataWrapperDTO, Error>) -> Void) {
+        let request = GetCharactersRequest(offset: offset, filter: filter)
         client.send(request, completion: completion)
     }
 }

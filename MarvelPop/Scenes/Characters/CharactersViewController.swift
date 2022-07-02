@@ -9,7 +9,36 @@ import Foundation
 import UIKit
 
 class CharactersViewController: UIViewController {
-    let loader = UIActivityIndicatorView(style: .medium)
+    lazy var noResultsView: UIView = {
+        let container = UIView(frame: .zero)
+        let noResults = UILabel(frame: .zero)
+        
+        
+        [container, noResults, emptyAnimation].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        container.addSubview(noResults)
+        container.addSubview(emptyAnimation)
+        
+        NSLayoutConstraint.activate([
+            emptyAnimation.topAnchor.constraint(equalTo: container.topAnchor),
+            emptyAnimation.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            emptyAnimation.heightAnchor.constraint(equalToConstant: 200),
+            noResults.topAnchor.constraint(equalTo: emptyAnimation.bottomAnchor, constant: 16),
+            noResults.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 24),
+            noResults.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -24),
+            noResults.bottomAnchor.constraint(equalTo: container.bottomAnchor)
+        ])
+        
+        noResults.textAlignment = .center
+        noResults.numberOfLines = 0
+        noResults.text = "Oops, seems like there are no results for your search 😖.\nTry again with another term."
+        
+        return container
+    }()
+    
+    let emptyAnimation = LottieWrapperView(named: "empty-search")
+    let loadAnimation = LottieWrapperView(named: "loading")
     let searchBar = UISearchBar(frame: .zero)
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     var model: CharactersViewInput?
@@ -32,17 +61,19 @@ class CharactersViewController: UIViewController {
     }
     
     func setupLoader() {
-        loader.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(loader)
+        loadAnimation.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loadAnimation)
         
         NSLayoutConstraint.activate([
-            loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            loadAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadAnimation.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loadAnimation.heightAnchor.constraint(equalToConstant: 200),
+            loadAnimation.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
     
     func setupViews() {
-        [searchBar, tableView].forEach {
+        [searchBar, tableView, noResultsView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
@@ -65,6 +96,10 @@ class CharactersViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            noResultsView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 32),
+            noResultsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            noResultsView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
 }
@@ -103,17 +138,31 @@ extension CharactersViewController: UITableViewDelegate {
 
 extension CharactersViewController: CharactersViewOutput {
     func update(_ state: CharactersViewState) {
-        if loader.isAnimating {
-            loader.stopAnimating()
+        if loadAnimation.isPlaying {
+            loadAnimation.stop()
         }
         
         switch state {
         case .loading:
-            loader.startAnimating()
+            loadAnimation.start()
             tableView.isHidden = true
-        case .data(let items), .search(let items):
+            noResultsView.isHidden = true
+            
+        case .data(let items):
             self.items = items
             tableView.isHidden = false
+            noResultsView.isHidden = true
+            
+        case .search(let items):
+            self.items = items
+            if items.count > 0 {
+                tableView.isHidden = false
+                noResultsView.isHidden = true
+            } else {
+                tableView.isHidden = true
+                noResultsView.isHidden = false
+                emptyAnimation.start()
+            }
         }
     }
 }

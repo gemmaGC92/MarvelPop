@@ -10,6 +10,7 @@ import Foundation
 protocol CharactersViewInput: AnyObject {
     func willAppear()
     func didSelect(_ indexPath: IndexPath)
+    func loadMoreData()
 }
 
 protocol CharactersViewOutput: AnyObject {

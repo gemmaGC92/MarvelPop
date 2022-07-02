@@ -8,92 +8,55 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    let tableView = UITableView(frame: .zero, style: .insetGrouped)
-    var model: HomeViewInput?
+    let descriptionLabel = UILabel(frame: .zero)
+    let logoImage = UIImageView(image: UIImage(named: "marvel-logo"))
+    let continueBtn = UIButton(frame: .zero)
     
-    var items: [MainSections] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    var model: HomeViewInput?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red:247/255, green:241/255, blue:227/255,alpha:1.0)
-        model?.willAppear()
-        setupTableView()
-        
-        self.navigationItem.title = "MARVEL UNIVERSE"
+        setupViews()
     }
     
-    func setupTableView() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.backgroundColor = .clear
-        tableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.identifier)
+    func setupViews() {
+        [logoImage, descriptionLabel, continueBtn].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
+        logoImage.contentMode = .scaleAspectFit
         
-        view.addSubview(tableView)
-        
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ])
-        
-        let header = UIView(frame: .zero)
-        let descriptionLabel = UILabel(frame: .zero)
         descriptionLabel.textColor = UIColor(red: 42/255, green: 44/255, blue: 48/255, alpha: 1)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.text = "Hi here! Nice to meet you. In this app you'll find any information related to the amazing Marvel wold. \n\nLet's start by selecting what do you want to look for:"
+        descriptionLabel.textAlignment = .center
+        descriptionLabel.text = "Hi here!👋🏼 Nice to meet you!\n\nIn this app you'll find any information related to the amazing Marvel Comics wold.\n\n\nTap the button and start exploring all the characters and it's information."
         
-        header.addSubview(descriptionLabel)
+        continueBtn.setTitle("Let's go!", for: .normal)
+        continueBtn.backgroundColor = UIColor(red: 33/255, green: 140/255, blue: 116/255, alpha: 1)
+        continueBtn.setTitleColor(.white, for: .normal)
+        continueBtn.layer.cornerRadius = 8
+        
         NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: header.topAnchor, constant: 16),
-            descriptionLabel.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 16),
-            descriptionLabel.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -16),
-            descriptionLabel.bottomAnchor.constraint(equalTo: header.bottomAnchor, constant: -16),
+            logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImage.heightAnchor.constraint(equalToConstant: 200),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 32),
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            
+            continueBtn.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 40),
+            continueBtn.leadingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor),
+            continueBtn.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor),
+            continueBtn.heightAnchor.constraint(equalToConstant: 50)
         ])
         
-        tableView.tableHeaderView = header
+        continueBtn.addTarget(self, action: #selector(onTap), for: .touchUpInside)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.updateHeaderFooterTableView()
-    }
-}
-
-extension HomeViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier) as? MainTableViewCell else { return UITableViewCell() }
-        switch items[indexPath.row] {
-        case .characters(let title), .creators(let title), .comics(let title), .stories(let title), .series(let title), .events(let title):
-            cell.bind(title: title)
-        }
-        return cell
-    }
-}
-
-extension HomeViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        model?.didSelect(items[indexPath.row])
-    }
-}
-
-extension HomeViewController: HomeViewOutput {
-    func load(data: [MainSections]) {
-        self.items = data
+    @objc func onTap() {
+        model?.onTap()
     }
 }

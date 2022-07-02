@@ -52,7 +52,7 @@ public extension APIRequest {
         return [:]
     }
     
-    private func getTimestamp() -> String {
+    func getTimestamp() -> String {
         let date = Date()
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -69,8 +69,8 @@ public extension APIRequest {
     }
     
     func generateQueryItems() -> [URLQueryItem] {
-        var ts = getTimestamp()
-        var hash = MD5(string: ts + privateKey + publicKey)
+        let ts = getTimestamp()
+        let hash = MD5(string: ts + privateKey + publicKey)
         return [
             URLQueryItem(name: "ts", value: getTimestamp()),
             URLQueryItem(name: "apikey", value: "c89204bb01e8bff368a2ca6fcb02d174"),
@@ -104,9 +104,20 @@ public extension APIRequest {
             else {
                 fatalError("Bad resourceName: \(resourcePath)")
         }
+        let ts = getTimestamp()
+        let hash = MD5(string: ts + privateKey + publicKey)
+        var items = [
+            URLQueryItem(name: "ts", value: getTimestamp()),
+            URLQueryItem(name: "apikey", value: "c89204bb01e8bff368a2ca6fcb02d174"),
+            URLQueryItem(name: "hash", value: hash)
+        ]
         
         let customQueryItems = generateQueryItems()
-        components.queryItems = customQueryItems.isEmpty ? nil : customQueryItems
+        if !customQueryItems.isEmpty {
+            items.append(contentsOf: customQueryItems)
+        }
+    
+        components.queryItems = items
         guard let finalURL = components.url else { fatalError("Bad URLComponents construction") }
         return URLRequest(url: finalURL)
     }

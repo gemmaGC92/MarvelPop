@@ -79,6 +79,16 @@ extension CharactersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         model?.didSelect(indexPath)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let threshold: CGFloat = 100
+        let current = scrollView.contentOffset.y + scrollView.bounds.height
+        let totalHeight = scrollView.contentSize.height
+        
+        if totalHeight - current < threshold {
+            model?.loadMoreData()
+        }
+    }
 }
 
 extension CharactersViewController: CharactersViewOutput {

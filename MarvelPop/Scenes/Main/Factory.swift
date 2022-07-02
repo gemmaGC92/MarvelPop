@@ -13,8 +13,6 @@ class Factory {
     func home(router: HomeViewRouter) -> UIViewController {
         let vc = HomeViewController()
         let model = HomeViewModel()
-        
-        model.output = vc
         model.router = router
         vc.model = model
         return vc

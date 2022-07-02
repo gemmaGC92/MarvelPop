@@ -8,14 +8,9 @@
 import Foundation
 
 protocol HomeViewInput: AnyObject {
-    func willAppear()
-    func didSelect(_ item: MainSections)
-}
-
-protocol HomeViewOutput: AnyObject {
-    func load(data: [MainSections])
+    func onTap()
 }
 
 protocol HomeViewRouter: AnyObject {
-    func showListOf(_ item: MainSections)
+    func onLetsGoTapped()
 }

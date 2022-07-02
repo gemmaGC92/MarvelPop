@@ -13,6 +13,8 @@
 		17BA370828704CDB00C06D5A /* CharactersViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BA370728704CDB00C06D5A /* CharactersViewModelTest.swift */; };
 		17BA370B28704D8E00C06D5A /* MockAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BA370A28704D8E00C06D5A /* MockAPIClient.swift */; };
 		17BA370E287050FC00C06D5A /* MarvelCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BA370D287050FC00C06D5A /* MarvelCharacters.swift */; };
+		17BA37102870E89D00C06D5A /* CharacterDetailViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BA370F2870E89D00C06D5A /* CharacterDetailViewModelTest.swift */; };
+		17BA37122870E8FC00C06D5A /* MarvelCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BA37112870E8FC00C06D5A /* MarvelCharacter.swift */; };
 		17CFD7AA285B600B0008D9B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD7A9285B600B0008D9B8 /* AppDelegate.swift */; };
 		17CFD7AC285B600B0008D9B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD7AB285B600B0008D9B8 /* SceneDelegate.swift */; };
 		17CFD7AE285B600B0008D9B8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD7AD285B600B0008D9B8 /* HomeViewController.swift */; };
@@ -65,6 +67,8 @@
 		17BA370728704CDB00C06D5A /* CharactersViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewModelTest.swift; sourceTree = "<group>"; };
 		17BA370A28704D8E00C06D5A /* MockAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIClient.swift; sourceTree = "<group>"; };
 		17BA370D287050FC00C06D5A /* MarvelCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelCharacters.swift; sourceTree = "<group>"; };
+		17BA370F2870E89D00C06D5A /* CharacterDetailViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewModelTest.swift; sourceTree = "<group>"; };
+		17BA37112870E8FC00C06D5A /* MarvelCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelCharacter.swift; sourceTree = "<group>"; };
 		17CFD7A6285B600B0008D9B8 /* MarvelPop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelPop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17CFD7A9285B600B0008D9B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17CFD7AB285B600B0008D9B8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				17BA370D287050FC00C06D5A /* MarvelCharacters.swift */,
+				17BA37112870E8FC00C06D5A /* MarvelCharacter.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 				17BA370928704D2400C06D5A /* Helpers */,
 				17CFD7C0285B600D0008D9B8 /* HomeViewModelTest.swift */,
 				17BA370728704CDB00C06D5A /* CharactersViewModelTest.swift */,
+				17BA370F2870E89D00C06D5A /* CharacterDetailViewModelTest.swift */,
 			);
 			path = MarvelPopTests;
 			sourceTree = "<group>";
@@ -462,6 +468,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				17BA370E287050FC00C06D5A /* MarvelCharacters.swift in Sources */,
+				17BA37102870E89D00C06D5A /* CharacterDetailViewModelTest.swift in Sources */,
+				17BA37122870E8FC00C06D5A /* MarvelCharacter.swift in Sources */,
 				17BA370828704CDB00C06D5A /* CharactersViewModelTest.swift in Sources */,
 				17CFD7C1285B600D0008D9B8 /* HomeViewModelTest.swift in Sources */,
 				17BA370B28704D8E00C06D5A /* MockAPIClient.swift in Sources */,

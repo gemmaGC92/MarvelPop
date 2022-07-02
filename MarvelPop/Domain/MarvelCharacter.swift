@@ -12,6 +12,7 @@ struct MarvelCharacter {
     var name: String?
     var description: String?
     var comics: ItemList?
+    var thumbnailURL: URL?
     
     init(_ dto: CharacterDTO) {
         self.name = dto.name
@@ -19,6 +20,9 @@ struct MarvelCharacter {
         self.id = dto.id
         if let comics = dto.comics {
             self.comics = ItemList(comics)
+        }
+        if let path = dto.thumbnail?.path, let ext = dto.thumbnail?.extension {
+            thumbnailURL = URL(string: "\(path).\(ext)")
         }
     }
 }

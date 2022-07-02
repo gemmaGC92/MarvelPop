@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol CharacterDetailViewInput: AnyObject {
     func willAppear()
@@ -13,9 +14,17 @@ protocol CharacterDetailViewInput: AnyObject {
 
 protocol CharacterDetailViewOutput: AnyObject {
     func update(_ state: CharacterDetailViewState)
+    func showImage(_ img: UIImage)
 }
 
-enum CharacterDetailViewState {
+enum CharacterDetailViewState: Equatable {
+    static func == (lhs: CharacterDetailViewState, rhs: CharacterDetailViewState) -> Bool {
+        switch (lhs, rhs) {
+        case (.loading, .loading), (.data, .data): return true
+        default: return false
+        }
+    }
+    
     case loading
     case data([CharacterSections])
 }

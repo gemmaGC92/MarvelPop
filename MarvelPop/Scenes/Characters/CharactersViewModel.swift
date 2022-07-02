@@ -38,7 +38,7 @@ class CharactersViewModel {
         guard let data = dto.data, let results = data.results else { return }
         paging = Paging(count: data.count ?? 0, offset: data.offset ?? 0, total: data.total ?? 0)
         filteredCharacters = results.map { MarvelCharacter($0) }
-        state = .data(filteredCharacters)
+        state = .search(filteredCharacters)
     }
     
     func fetchCharacters(offset: Int? = nil) {

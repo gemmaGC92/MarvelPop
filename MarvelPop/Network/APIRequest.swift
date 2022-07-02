@@ -60,7 +60,7 @@ public extension APIRequest {
         return timestamp
     }
 
-    func MD5(string: String) -> String {
+    private func MD5(string: String) -> String {
         let digest = Insecure.MD5.hash(data: string.data(using: .utf8) ?? Data())
 
         return digest.map {
@@ -69,13 +69,7 @@ public extension APIRequest {
     }
     
     func generateQueryItems() -> [URLQueryItem] {
-        var ts = getTimestamp()
-        var hash = MD5(string: ts + privateKey + publicKey)
-        return [
-            URLQueryItem(name: "ts", value: getTimestamp()),
-            URLQueryItem(name: "apikey", value: "c89204bb01e8bff368a2ca6fcb02d174"),
-            URLQueryItem(name: "hash", value: hash)
-        ]
+        return []
     }
     
     func generateURLrequest(_ baseURL: URL) -> URLRequest {
@@ -104,9 +98,20 @@ public extension APIRequest {
             else {
                 fatalError("Bad resourceName: \(resourcePath)")
         }
+        let ts = getTimestamp()
+        let hash = MD5(string: ts + privateKey + publicKey)
+        var items = [
+            URLQueryItem(name: "ts", value: getTimestamp()),
+            URLQueryItem(name: "apikey", value: "c89204bb01e8bff368a2ca6fcb02d174"),
+            URLQueryItem(name: "hash", value: hash)
+        ]
         
         let customQueryItems = generateQueryItems()
-        components.queryItems = customQueryItems.isEmpty ? nil : customQueryItems
+        if !customQueryItems.isEmpty {
+            items.append(contentsOf: customQueryItems)
+        }
+    
+        components.queryItems = items
         guard let finalURL = components.url else { fatalError("Bad URLComponents construction") }
         return URLRequest(url: finalURL)
     }

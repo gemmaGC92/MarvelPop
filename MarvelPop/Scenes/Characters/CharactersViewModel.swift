@@ -13,6 +13,8 @@ class CharactersViewModel {
     weak var router: CharactersRouter?
     
     var marvelCharacters: [MarvelCharacter] = []
+    var paging: Paging?
+    private var isFetchingData = false
     
     private var state: CharactersViewState = .loading {
         didSet {
@@ -25,22 +27,18 @@ class CharactersViewModel {
     }
     
     func handleCharactersData(_ dto: CharacterDataWrapperDTO) {
-        guard let results = dto.data?.results else { return }
-        marvelCharacters = results.map { MarvelCharacter($0) }
+        guard let data = dto.data, let results = data.results else { return }
+        paging = Paging(count: data.count ?? 0, offset: data.offset ?? 0, total: data.total ?? 0)
+        marvelCharacters.append(contentsOf: results.map { MarvelCharacter($0) })
         state = .data(marvelCharacters)
     }
-}
-
-extension CharactersViewModel: CharactersViewInput {
-    func didSelect(_ indexPath: IndexPath) {
-        guard indexPath.row < marvelCharacters.count else { return }
-        router?.showDetails(marvelCharacters[indexPath.row])
-    }
     
-    func willAppear() {
-        state = .loading
-        provider.getCharacters { [weak self] result in
+    func fetchCharacters(offset: Int? = nil) {
+        guard !isFetchingData else { return }
+        isFetchingData = true
+        provider.getCharacters(offset: offset) { [weak self] result in
             guard let self = self else { return }
+            self.isFetchingData = false
             switch result {
             case .failure(let error):
                 print(error)
@@ -48,5 +46,24 @@ extension CharactersViewModel: CharactersViewInput {
                 self.handleCharactersData(data)
             }
         }
+    }
+}
+
+extension CharactersViewModel: CharactersViewInput {
+    func loadMoreData() {
+        guard let paging = paging else { return }
+        if paging.hasMoreData == true {
+            fetchCharacters(offset: paging.offset + 20)
+        }
+    }
+    
+    func didSelect(_ indexPath: IndexPath) {
+        guard indexPath.row < marvelCharacters.count else { return }
+        router?.showDetails(marvelCharacters[indexPath.row])
+    }
+    
+    func willAppear() {
+        state = .loading
+        fetchCharacters()
     }
 }

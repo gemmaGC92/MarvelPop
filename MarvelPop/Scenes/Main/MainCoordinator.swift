@@ -40,21 +40,8 @@ class MainCoordinator {
 }
 
 extension MainCoordinator: HomeViewRouter {
-    func showListOf(_ item: MainSections) {
-        switch item {
-        case .characters:
-            openCharactersList()
-        case .comics(let string):
-            break
-        case .creators(let string):
-            break
-        case .events(let string):
-            break
-        case .series(let string):
-            break
-        case .stories(let string):
-            break
-        }
+    func onLetsGoTapped() {
+        openCharactersList()
     }
 }
 

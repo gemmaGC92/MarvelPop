@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 class CharactersViewController: UIViewController {
-    
     let loader = UIActivityIndicatorView(style: .medium)
+    let searchBar = UISearchBar(frame: .zero)
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     var model: CharactersViewInput?
     
@@ -24,7 +24,7 @@ class CharactersViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red:247/255, green:241/255, blue:227/255,alpha:1.0)
         
-        setupTableView()
+        setupViews()
         setupLoader()
         model?.willAppear()
         
@@ -41,17 +41,27 @@ class CharactersViewController: UIViewController {
         ])
     }
     
-    func setupTableView() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+    func setupViews() {
+        [searchBar, tableView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
+    
+        searchBar.delegate = self
+        searchBar.placeholder = "Search..."
+        searchBar.tintColor = UIColor(red: 33/255, green: 140/255, blue: 116/255, alpha: 1)
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .clear
         tableView.register(CharacterTableViewCell.self, forCellReuseIdentifier: CharacterTableViewCell.identifier)
         
-        view.addSubview(tableView)
-        
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -100,8 +110,24 @@ extension CharactersViewController: CharactersViewOutput {
         switch state {
         case .loading:
             loader.startAnimating()
-        case .data(let items):
+            tableView.isHidden = true
+        case .data(let items), .search(let items):
             self.items = items
+            tableView.isHidden = false
         }
+    }
+}
+
+extension CharactersViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            model?.exitSearchMode()
+        } else {
+            model?.search(searchText)
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        model?.exitSearchMode()
     }
 }

@@ -11,6 +11,8 @@ protocol CharactersViewInput: AnyObject {
     func willAppear()
     func didSelect(_ indexPath: IndexPath)
     func loadMoreData()
+    func search(_ filter: String)
+    func exitSearchMode()
 }
 
 protocol CharactersViewOutput: AnyObject {
@@ -31,4 +33,5 @@ enum CharactersViewState: Equatable {
     
     case loading
     case data([MarvelCharacter])
+    case search([MarvelCharacter])
 }

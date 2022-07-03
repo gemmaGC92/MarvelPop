@@ -23,7 +23,7 @@ class CharacterDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red:247/255, green:241/255, blue:227/255,alpha:1.0)
+        view.backgroundColor = Tokens.Colors.background
         
         setupTableView()
         setupLoader()
@@ -39,15 +39,15 @@ class CharacterDetailViewController: UIViewController {
         tableView.tableHeaderView = container
         
         NSLayoutConstraint.activate([
-            headerImage.topAnchor.constraint(equalTo: container.topAnchor, constant: 16),
-            headerImage.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -24),
-            headerImage.heightAnchor.constraint(equalToConstant: 150),
+            headerImage.topAnchor.constraint(equalTo: container.topAnchor, constant: Tokens.Margin.medium),
+            headerImage.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -Tokens.Margin.large),
+            headerImage.heightAnchor.constraint(equalToConstant: Tokens.Height.detailImage),
             headerImage.widthAnchor.constraint(equalTo: headerImage.heightAnchor),
             headerImage.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             container.centerXAnchor.constraint(equalTo: self.tableView.centerXAnchor)
         ])
         
-        headerImage.layer.borderWidth = 5.0
+        headerImage.layer.borderWidth = Tokens.Border.image
         headerImage.layer.borderColor = UIColor.white.cgColor
     }
     

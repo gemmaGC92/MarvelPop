@@ -15,7 +15,9 @@ class CharactersViewModel {
     var marvelCharacters: [MarvelCharacter] = []
     var filteredCharacters: [MarvelCharacter] = []
     var paging: Paging?
-    private var isFetchingData = false
+    
+    var isFetchingData = false
+    var isSearchMode = false
     
     private var state: CharactersViewState = .loading {
         didSet {
@@ -75,9 +77,11 @@ class CharactersViewModel {
 extension CharactersViewModel: CharactersViewInput {
     func exitSearchMode() {
         state = .data(marvelCharacters)
+        isSearchMode = false
     }
     
     func search(_ filter: String) {
+        isSearchMode = true
         state = .loading
         filterCharacters(filter: filter)
     }
@@ -90,8 +94,13 @@ extension CharactersViewModel: CharactersViewInput {
     }
     
     func didSelect(_ indexPath: IndexPath) {
-        guard indexPath.row < marvelCharacters.count else { return }
-        router?.showDetails(marvelCharacters[indexPath.row])
+        if isSearchMode {
+            guard indexPath.row < filteredCharacters.count else { return }
+            router?.showDetails(filteredCharacters[indexPath.row])
+        } else {
+            guard indexPath.row < marvelCharacters.count else { return }
+            router?.showDetails(marvelCharacters[indexPath.row])
+        }
     }
     
     func willAppear() {

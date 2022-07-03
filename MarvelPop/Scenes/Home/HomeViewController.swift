@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red:247/255, green:241/255, blue:227/255,alpha:1.0)
+        view.backgroundColor = Tokens.Colors.background
         setupViews()
     }
     
@@ -27,30 +27,30 @@ class HomeViewController: UIViewController {
         }
         logoImage.contentMode = .scaleAspectFit
         
-        descriptionLabel.textColor = UIColor(red: 42/255, green: 44/255, blue: 48/255, alpha: 1)
+        descriptionLabel.textColor = Tokens.Colors.primaryText
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textAlignment = .center
-        descriptionLabel.text = "Hi here!👋🏼 Nice to meet you!\n\nIn this app you'll find any information related to the amazing Marvel Comics wold.\n\n\nTap the button and start exploring all the characters and it's information."
+        descriptionLabel.text = "Hi there!👋🏼 Nice to meet you!\n\nIn this app you'll find a lot of information related to the amazing Marvel Comics wold.\n\nTap the button and start exploring all the characters and its information."
         
         continueBtn.setTitle("Let's go!", for: .normal)
-        continueBtn.backgroundColor = UIColor(red: 33/255, green: 140/255, blue: 116/255, alpha: 1)
+        continueBtn.backgroundColor = Tokens.Colors.accent
         continueBtn.setTitleColor(.white, for: .normal)
-        continueBtn.layer.cornerRadius = 8
+        continueBtn.layer.cornerRadius = Tokens.Radius.buttton
         
         NSLayoutConstraint.activate([
-            logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Tokens.Margin.xlarge),
             logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImage.heightAnchor.constraint(equalToConstant: 200),
+            logoImage.heightAnchor.constraint(equalToConstant: Tokens.Height.homeLogo),
             
-            descriptionLabel.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 32),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            descriptionLabel.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: Tokens.Margin.xlarge),
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Tokens.Margin.large),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Tokens.Margin.large),
             
-            continueBtn.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 40),
+            continueBtn.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Tokens.Margin.xxlarge),
             continueBtn.leadingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor),
             continueBtn.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor),
-            continueBtn.heightAnchor.constraint(equalToConstant: 50)
+            continueBtn.heightAnchor.constraint(equalToConstant: Tokens.Height.button)
         ])
         
         continueBtn.addTarget(self, action: #selector(onTap), for: .touchUpInside)

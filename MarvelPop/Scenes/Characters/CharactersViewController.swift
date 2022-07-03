@@ -23,13 +23,14 @@ class CharactersViewController: UIViewController {
         NSLayoutConstraint.activate([
             emptyAnimation.topAnchor.constraint(equalTo: container.topAnchor),
             emptyAnimation.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            emptyAnimation.heightAnchor.constraint(equalToConstant: 200),
-            noResults.topAnchor.constraint(equalTo: emptyAnimation.bottomAnchor, constant: 16),
-            noResults.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 24),
-            noResults.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -24),
+            emptyAnimation.heightAnchor.constraint(equalToConstant: Tokens.Height.animation),
+            noResults.topAnchor.constraint(equalTo: emptyAnimation.bottomAnchor, constant: Tokens.Margin.medium),
+            noResults.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: Tokens.Margin.large),
+            noResults.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -Tokens.Margin.large),
             noResults.bottomAnchor.constraint(equalTo: container.bottomAnchor)
         ])
         
+        noResults.textColor = Tokens.Colors.primaryText
         noResults.textAlignment = .center
         noResults.numberOfLines = 0
         noResults.text = "Oops, seems like there are no results for your search 😖.\nTry again with another term."
@@ -51,7 +52,8 @@ class CharactersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red:247/255, green:241/255, blue:227/255,alpha:1.0)
+        view.backgroundColor = Tokens.Colors.background
+        navigationItem.hidesBackButton = true
         
         setupViews()
         setupLoader()
@@ -67,8 +69,8 @@ class CharactersViewController: UIViewController {
         NSLayoutConstraint.activate([
             loadAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loadAnimation.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            loadAnimation.heightAnchor.constraint(equalToConstant: 200),
-            loadAnimation.widthAnchor.constraint(equalToConstant: 200)
+            loadAnimation.heightAnchor.constraint(equalToConstant: Tokens.Height.animation),
+            loadAnimation.widthAnchor.constraint(equalToConstant: Tokens.Height.animation)
         ])
     }
     
@@ -80,7 +82,7 @@ class CharactersViewController: UIViewController {
     
         searchBar.delegate = self
         searchBar.placeholder = "Search..."
-        searchBar.tintColor = UIColor(red: 33/255, green: 140/255, blue: 116/255, alpha: 1)
+        searchBar.tintColor = Tokens.Colors.accent
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -97,7 +99,7 @@ class CharactersViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            noResultsView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 32),
+            noResultsView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: Tokens.Margin.xlarge),
             noResultsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             noResultsView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])

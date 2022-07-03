@@ -25,7 +25,9 @@ class CharacterTableViewCell: UITableViewCell {
     
     func setupViews() {
         title.font = UIFont.boldSystemFont(ofSize: 16)
+        title.textColor = Tokens.Colors.primaryText
         subtitle.font = UIFont.systemFont(ofSize: 14)
+        subtitle.textColor = Tokens.Colors.primaryText
         subtitle.numberOfLines = 2
         
         [title, subtitle].forEach {
@@ -34,17 +36,17 @@ class CharacterTableViewCell: UITableViewCell {
         }
         
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Tokens.Margin.medium),
+            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Tokens.Margin.medium),
+            title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Tokens.Margin.medium),
             
-            subtitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 4),
+            subtitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Tokens.Margin.xsmall),
             subtitle.leadingAnchor.constraint(equalTo: title.leadingAnchor),
             subtitle.trailingAnchor.constraint(equalTo: title.trailingAnchor),
-            subtitle.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            subtitle.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Tokens.Margin.medium)
         ])
         
-        separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        separatorInset = UIEdgeInsets(top: 0, left: Tokens.Margin.medium, bottom: 0, right: 0)
         selectionStyle = .none
     }
     

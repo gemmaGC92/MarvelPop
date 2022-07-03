@@ -19,6 +19,8 @@
 		17BA37172870FFFD00C06D5A /* LottieWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BA37162870FFFD00C06D5A /* LottieWrapperView.swift */; };
 		17BA371A2871046100C06D5A /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 17BA37192871046100C06D5A /* loading.json */; };
 		17BA372028710BF200C06D5A /* empty-search.json in Resources */ = {isa = PBXBuildFile; fileRef = 17BA371F28710BF200C06D5A /* empty-search.json */; };
+		17BA37262872138100C06D5A /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BA37252872138100C06D5A /* Tokens.swift */; };
+		17BA37292872144600C06D5A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17BA37282872144600C06D5A /* Colors.xcassets */; };
 		17CFD7AA285B600B0008D9B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD7A9285B600B0008D9B8 /* AppDelegate.swift */; };
 		17CFD7AC285B600B0008D9B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD7AB285B600B0008D9B8 /* SceneDelegate.swift */; };
 		17CFD7AE285B600B0008D9B8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD7AD285B600B0008D9B8 /* HomeViewController.swift */; };
@@ -76,6 +78,8 @@
 		17BA37162870FFFD00C06D5A /* LottieWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieWrapperView.swift; sourceTree = "<group>"; };
 		17BA37192871046100C06D5A /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		17BA371F28710BF200C06D5A /* empty-search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "empty-search.json"; sourceTree = "<group>"; };
+		17BA37252872138100C06D5A /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
+		17BA37282872144600C06D5A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		17CFD7A6285B600B0008D9B8 /* MarvelPop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelPop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17CFD7A9285B600B0008D9B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17CFD7AB285B600B0008D9B8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -164,10 +168,19 @@
 		17BA37182871045100C06D5A /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				17BA37162870FFFD00C06D5A /* LottieWrapperView.swift */,
+				17BA37232872132200C06D5A /* Json */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		17BA37232872132200C06D5A /* Json */ = {
+			isa = PBXGroup;
+			children = (
 				17BA37192871046100C06D5A /* loading.json */,
 				17BA371F28710BF200C06D5A /* empty-search.json */,
 			);
-			path = Animations;
+			path = Json;
 			sourceTree = "<group>";
 		};
 		17CFD79D285B600B0008D9B8 = {
@@ -193,15 +206,16 @@
 		17CFD7A8285B600B0008D9B8 /* MarvelPop */ = {
 			isa = PBXGroup;
 			children = (
-				17CFD814285E34610008D9B8 /* Domain */,
-				17CFD808285E1FA20008D9B8 /* Extensions */,
 				17CFD7F6285CD0F50008D9B8 /* Configuration */,
 				17CFD7EC285CCA960008D9B8 /* Network */,
+				17CFD808285E1FA20008D9B8 /* Extensions */,
 				17CFD7D9285B628D0008D9B8 /* CustomViews */,
+				17CFD814285E34610008D9B8 /* Domain */,
 				17CFD7FB285CD6DA0008D9B8 /* Scenes */,
 				17CFD7A9285B600B0008D9B8 /* AppDelegate.swift */,
 				17CFD7AB285B600B0008D9B8 /* SceneDelegate.swift */,
 				17CFD7B2285B600D0008D9B8 /* Assets.xcassets */,
+				17BA37282872144600C06D5A /* Colors.xcassets */,
 				17CFD7B4285B600D0008D9B8 /* LaunchScreen.storyboard */,
 				17CFD7B7285B600D0008D9B8 /* Info.plist */,
 			);
@@ -234,7 +248,7 @@
 			children = (
 				17BA37182871045100C06D5A /* Animations */,
 				17CFD7DA285B62970008D9B8 /* Cells */,
-				17BA37162870FFFD00C06D5A /* LottieWrapperView.swift */,
+				17BA37252872138100C06D5A /* Tokens.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -435,6 +449,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17BA37292872144600C06D5A /* Colors.xcassets in Resources */,
 				17CFD7B6285B600D0008D9B8 /* LaunchScreen.storyboard in Resources */,
 				17CFD7B3285B600D0008D9B8 /* Assets.xcassets in Resources */,
 				17BA371A2871046100C06D5A /* loading.json in Resources */,
@@ -488,6 +503,7 @@
 				17CFD7AC285B600B0008D9B8 /* SceneDelegate.swift in Sources */,
 				17BA37172870FFFD00C06D5A /* LottieWrapperView.swift in Sources */,
 				17CFD816285E34720008D9B8 /* MarvelCharacter.swift in Sources */,
+				17BA37262872138100C06D5A /* Tokens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

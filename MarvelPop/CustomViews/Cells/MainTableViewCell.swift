@@ -24,19 +24,20 @@ class MainTableViewCell: UITableViewCell {
     func setupViews() {
         title.translatesAutoresizingMaskIntoConstraints = false
         title.font = UIFont.systemFont(ofSize: 16)
+        title.textColor = Tokens.Colors.primaryText
         title.numberOfLines = 0
         
         contentView.addSubview(title)
         
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            title.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Tokens.Margin.medium),
+            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Tokens.Margin.medium),
+            title.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Tokens.Margin.medium),
+            title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Tokens.Margin.medium),
         ])
         
         selectionStyle = .none
-        separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        separatorInset = UIEdgeInsets(top: 0, left: Tokens.Margin.medium, bottom: 0, right: 0)
     }
     
     public func bind(title: String, showDisclosure: Bool = true) {

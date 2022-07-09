@@ -22,6 +22,8 @@ class MainCoordinator {
     
     public func start() -> UIViewController {
         self.navigator = UINavigationController(rootViewController: factory.home(router: self))
+        navigator?.navigationBar.tintColor = Tokens.Colors.accent
+        navigator?.navigationItem.backButtonTitle = ""
         guard let nav = navigator else {
             return UIViewController()
         }

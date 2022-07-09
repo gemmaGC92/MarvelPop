@@ -59,6 +59,7 @@ class CharactersViewController: UIViewController {
         model?.willAppear()
         
         navigationItem.title = "MARVEL CHARACTERS"
+        navigationItem.hidesBackButton = true
     }
     
     func setupLoader() {

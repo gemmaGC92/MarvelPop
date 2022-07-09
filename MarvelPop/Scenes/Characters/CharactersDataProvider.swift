@@ -39,6 +39,7 @@ struct ImageDTO: Codable {
 }
 
 struct ItemListDTO: Codable {
+    var available: Int?
     var items: [ItemSummaryDTO]?
 }
 

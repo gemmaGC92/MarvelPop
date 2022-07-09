@@ -10,11 +10,16 @@ import UIKit
 
 protocol CharacterDetailViewInput: AnyObject {
     func willAppear()
+    func showPublication(type: PublicationType)
 }
 
 protocol CharacterDetailViewOutput: AnyObject {
     func update(_ state: CharacterDetailViewState)
     func showImage(_ img: UIImage)
+}
+
+protocol CharacterDetailRouter: AnyObject {
+    func showPublication(for id: Int, type: PublicationType)
 }
 
 enum CharacterDetailViewState: Equatable {

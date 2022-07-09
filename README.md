@@ -5,3 +5,6 @@ Once downloaded, you can open in Xcode and let it download the necessary package
 
 ### External libraries used (SPM)
 - Lottie: Animations for the loading states / empty search results.
+
+#### Licences
+Data provided by Marvel. © 2014 Marvel

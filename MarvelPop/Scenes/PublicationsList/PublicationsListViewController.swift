@@ -28,6 +28,27 @@ class PublicationsListViewController: UIViewController {
         model?.willAppear()
     }
     
+    func setupHeaderView() {
+        let container = UIView(frame: .zero)
+        let disclaimerLabel = UILabel(frame: .zero)
+        disclaimerLabel.textColor = Tokens.Colors.secondaryText
+        disclaimerLabel.font = .systemFont(ofSize: 10)
+        disclaimerLabel.textAlignment = .center
+        disclaimerLabel.text = "Data provided by Marvel. © 2014 Marvel"
+        
+        [container, disclaimerLabel].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        container.addSubview(disclaimerLabel)
+        tableView.tableHeaderView = container
+        
+        NSLayoutConstraint.activate([
+            disclaimerLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: Tokens.Margin.small),
+            disclaimerLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: Tokens.Margin.medium),
+            disclaimerLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -Tokens.Margin.medium),
+            disclaimerLabel.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -Tokens.Margin.medium),
+            container.centerXAnchor.constraint(equalTo: self.tableView.centerXAnchor)
+        ])
+    }
+    
     func setupLoader() {
         loadAnimation.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loadAnimation)
@@ -55,6 +76,8 @@ class PublicationsListViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        
+        setupHeaderView()
     }
 }
 

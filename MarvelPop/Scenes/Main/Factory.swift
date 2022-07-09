@@ -28,11 +28,21 @@ class Factory {
         return vc
     }
     
-    func characterDetails(_ item: MarvelCharacter) -> UIViewController {
+    func characterDetails(_ item: MarvelCharacter, router: CharacterDetailRouter) -> UIViewController {
         let vc = CharacterDetailViewController()
         let model = CharacterDetailViewModel(marvelCharacter: item)
         vc.model = model
         model.output = vc
+        model.router = router
+        return vc
+    }
+    
+    func publication(_ id: Int, type: PublicationType, client: MarvelAPIClient) -> UIViewController {
+        let vc = PublicationsListViewController()
+        let provider = PublicationsListDataProvider(client: client)
+        let model = PublicationsListViewModel(id: id, type: type, provider: provider)
+        model.output = vc
+        vc.model = model
         return vc
     }
 }

@@ -53,7 +53,6 @@ class CharactersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Tokens.Colors.background
-        navigationItem.hidesBackButton = true
         
         setupViews()
         setupLoader()

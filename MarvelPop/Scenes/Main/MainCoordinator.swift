@@ -34,7 +34,12 @@ class MainCoordinator {
     }
     
     func openCharacterDetails(_ item: MarvelCharacter) {
-        let vc = factory.characterDetails(item)
+        let vc = factory.characterDetails(item, router: self)
+        navigator?.pushViewController(vc, animated: true)
+    }
+    
+    func openPublication(id: Int, type: PublicationType) {
+        let vc = factory.publication(id, type: type, client: client)
         navigator?.pushViewController(vc, animated: true)
     }
 }
@@ -48,5 +53,11 @@ extension MainCoordinator: HomeViewRouter {
 extension MainCoordinator: CharactersRouter {
     func showDetails(_ item: MarvelCharacter) {
         openCharacterDetails(item)
+    }
+}
+
+extension MainCoordinator: CharacterDetailRouter {
+    func showPublication(for id: Int, type: PublicationType) {
+        openPublication(id: id, type: type)
     }
 }

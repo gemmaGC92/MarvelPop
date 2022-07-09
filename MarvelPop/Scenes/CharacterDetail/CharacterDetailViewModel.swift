@@ -13,17 +13,22 @@ struct CharacterInfoData {
     var description: String?
 }
 
+struct CharacterPublications {
+    var name: String
+    var type: PublicationType
+    var items: ItemList
+}
+
 enum CharacterSections {
     case info(CharacterInfoData)
-    case comics(ItemList)
-//    case stories(ItemList)
-//    case events(ItemList)
-//    case series(ItemList)
+    case data([CharacterPublications])
+    case events(ItemList)
 }
 
 class CharacterDetailViewModel {
     let marvelCharacter: MarvelCharacter
     weak var output: CharacterDetailViewOutput?
+    weak var router: CharacterDetailRouter?
     
     var state: CharacterDetailViewState = .loading {
         didSet {
@@ -43,10 +48,25 @@ class CharacterDetailViewModel {
             sections.append(.info(CharacterInfoData(title: name, description: marvelCharacter.description)))
         }
         
+        var publications: [CharacterPublications] = []
+        
         if let comics = marvelCharacter.comics {
-            sections.append(.comics(comics))
+            publications.append(CharacterPublications(name: "Comics", type: .comics, items: comics))
         }
         
+        if let series = marvelCharacter.series {
+            publications.append(CharacterPublications(name: "Series", type: .series, items: series))
+        }
+        
+        if let stories = marvelCharacter.stories {
+            publications.append(CharacterPublications(name: "Stories", type: .stories, items: stories))
+        }
+        
+        sections.append(.data(publications))
+        
+        if let events = marvelCharacter.events {
+            sections.append(.events(events))
+        }
         state = .data(sections)
     }
     
@@ -63,6 +83,11 @@ class CharacterDetailViewModel {
 }
 
 extension CharacterDetailViewModel: CharacterDetailViewInput {
+    func showPublication(type: PublicationType) {
+        guard let id = marvelCharacter.id else { return }
+        router?.showPublication(for: id, type: type)
+    }
+    
     func willAppear() {
         buildData()
     }

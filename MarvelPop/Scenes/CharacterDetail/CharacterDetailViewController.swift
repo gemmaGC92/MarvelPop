@@ -86,19 +86,46 @@ class CharacterDetailViewController: UIViewController {
 }
 
 extension CharacterDetailViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch sections[indexPath.section] {
+        case .data(let publicationType):
+            model?.showPublication(type: publicationType[indexPath.row].type)
+        default:
+            break
+        }
+    }
 }
 
 extension CharacterDetailViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch sections[section] {
+        case .events(let data):
+            guard let available = data.available, available > 0 else { return "" }
+            return "Events"
+        case .data:
+            return "Publications"
+        default:
+            return ""
+        }
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch sections[indexPath.section] {
         case .info(let model):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier) as? CharacterTableViewCell else { return UITableViewCell() }
             cell.bind(title: model.title, subtitle: model.description, subtitleMultiline: true)
             return cell
-        case .comics(let models):
+            
+        case .data(let models):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier) as? MainTableViewCell else { return UITableViewCell() }
-            cell.bind(title: models.items?[indexPath.row].name ?? "", showDisclosure: false)
+            let model = models[indexPath.row]
+            cell.bind(title: "\(model.name) (\(model.items.available ?? 0))", showDisclosure: true)
+            return cell
+        
+        case .events(let models):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier) as? MainTableViewCell,
+                  let name = models.items?[indexPath.row].name else { return UITableViewCell() }
+            cell.bind(title: name, showDisclosure: false)
             return cell
         }
     }
@@ -107,8 +134,10 @@ extension CharacterDetailViewController: UITableViewDataSource {
         switch sections[section] {
         case .info:
             return 1
-        case .comics(let models):
-            return models.items?.count ?? 0
+        case .data(let models):
+            return models.count
+        case .events(let data):
+            return data.items?.count ?? 0
         }
     }
     

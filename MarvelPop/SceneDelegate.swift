@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
                
         let window = UIWindow(windowScene: windowScene)
-        let identityProvider = IdentityProvider(key: "c89204bb01e8bff368a2ca6fcb02d174")
+
         let client = MarvelAPIClient(baseURL: URL(string: "https://gateway.marvel.com:443")!)
         rootCoord = MainCoordinator(rootWindow: window, client: client, factory: Factory())
 

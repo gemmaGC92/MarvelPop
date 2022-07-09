@@ -52,6 +52,8 @@
 		17CFD816285E34720008D9B8 /* MarvelCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD815285E34720008D9B8 /* MarvelCharacter.swift */; };
 		17CFD819285E387B0008D9B8 /* CharactersContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD818285E387B0008D9B8 /* CharactersContracts.swift */; };
 		17CFD81B285E39F70008D9B8 /* CharacterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD81A285E39F70008D9B8 /* CharacterTableViewCell.swift */; };
+		17E4EFD52879BBF200AA9047 /* PublicationsListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E4EFD42879BBF200AA9047 /* PublicationsListViewModelTest.swift */; };
+		17E4EFD72879BD1D00AA9047 /* Publications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E4EFD62879BD1D00AA9047 /* Publications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +122,8 @@
 		17CFD815285E34720008D9B8 /* MarvelCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelCharacter.swift; sourceTree = "<group>"; };
 		17CFD818285E387B0008D9B8 /* CharactersContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersContracts.swift; sourceTree = "<group>"; };
 		17CFD81A285E39F70008D9B8 /* CharacterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTableViewCell.swift; sourceTree = "<group>"; };
+		17E4EFD42879BBF200AA9047 /* PublicationsListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicationsListViewModelTest.swift; sourceTree = "<group>"; };
+		17E4EFD62879BD1D00AA9047 /* Publications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,7 @@
 			children = (
 				17BA370D287050FC00C06D5A /* MarvelCharacters.swift */,
 				17BA37112870E8FC00C06D5A /* MarvelCharacter.swift */,
+				17E4EFD62879BD1D00AA9047 /* Publications.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 				17CFD7C0285B600D0008D9B8 /* HomeViewModelTest.swift */,
 				17BA370728704CDB00C06D5A /* CharactersViewModelTest.swift */,
 				17BA370F2870E89D00C06D5A /* CharacterDetailViewModelTest.swift */,
+				17E4EFD42879BBF200AA9047 /* PublicationsListViewModelTest.swift */,
 			);
 			path = MarvelPopTests;
 			sourceTree = "<group>";
@@ -541,6 +547,8 @@
 			files = (
 				17BA370E287050FC00C06D5A /* MarvelCharacters.swift in Sources */,
 				17BA37102870E89D00C06D5A /* CharacterDetailViewModelTest.swift in Sources */,
+				17E4EFD72879BD1D00AA9047 /* Publications.swift in Sources */,
+				17E4EFD52879BBF200AA9047 /* PublicationsListViewModelTest.swift in Sources */,
 				17BA37122870E8FC00C06D5A /* MarvelCharacter.swift in Sources */,
 				17BA370828704CDB00C06D5A /* CharactersViewModelTest.swift in Sources */,
 				17CFD7C1285B600D0008D9B8 /* HomeViewModelTest.swift in Sources */,

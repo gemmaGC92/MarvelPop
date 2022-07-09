@@ -44,7 +44,7 @@ class CharacterDetailViewModelTest: XCTestCase {
         XCTAssertEqual(output.state, .data([]))
         switch output.state {
         case .data(let sections):
-            XCTAssertEqual(sections.count, 2)
+            XCTAssertEqual(sections.count, 3)
         default:
             XCTFail()
         }

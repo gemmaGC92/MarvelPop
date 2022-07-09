@@ -17,7 +17,14 @@ protocol PublicationsListViewOutput: AnyObject {
     func showTitle(_ title: String)
 }
 
-enum PublicationsListViewState {
+enum PublicationsListViewState: Equatable {
+    static func == (lhs: PublicationsListViewState, rhs: PublicationsListViewState) -> Bool {
+        switch (lhs, rhs) {
+        case (.loading, .loading), (.data, .data): return true
+        default: return false
+        }
+    }
+    
     case loading
     case data([Publication])
 }

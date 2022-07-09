@@ -41,7 +41,6 @@
 		17CFD7F5285CCE000008D9B8 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD7F4285CCE000008D9B8 /* Repository.swift */; };
 		17CFD7F8285CD1020008D9B8 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD7F7285CD1020008D9B8 /* AppConfiguration.swift */; };
 		17CFD7FE285CD6ED0008D9B8 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD7FD285CD6ED0008D9B8 /* MainCoordinator.swift */; };
-		17CFD800285CD90A0008D9B8 /* IdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD7FF285CD90A0008D9B8 /* IdentityProvider.swift */; };
 		17CFD802285E08BF0008D9B8 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD801285E08BF0008D9B8 /* HomeViewModel.swift */; };
 		17CFD807285E093D0008D9B8 /* HomeContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD806285E093D0008D9B8 /* HomeContracts.swift */; };
 		17CFD80A285E1FB10008D9B8 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD809285E1FB10008D9B8 /* UITableView+Extensions.swift */; };
@@ -111,7 +110,6 @@
 		17CFD7F4285CCE000008D9B8 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		17CFD7F7285CD1020008D9B8 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		17CFD7FD285CD6ED0008D9B8 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		17CFD7FF285CD90A0008D9B8 /* IdentityProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityProvider.swift; sourceTree = "<group>"; };
 		17CFD801285E08BF0008D9B8 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		17CFD806285E093D0008D9B8 /* HomeContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContracts.swift; sourceTree = "<group>"; };
 		17CFD809285E1FB10008D9B8 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
@@ -296,7 +294,6 @@
 				17CFD7EF285CCC480008D9B8 /* APIRequest.swift */,
 				17CFD7F1285CCCF20008D9B8 /* Logger.swift */,
 				17CFD7F4285CCE000008D9B8 /* Repository.swift */,
-				17CFD7FF285CD90A0008D9B8 /* IdentityProvider.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -523,7 +520,6 @@
 				17A565CE2875DC1500F0AFAA /* PublicationsListViewModel.swift in Sources */,
 				17CFD81B285E39F70008D9B8 /* CharacterTableViewCell.swift in Sources */,
 				17CFD807285E093D0008D9B8 /* HomeContracts.swift in Sources */,
-				17CFD800285CD90A0008D9B8 /* IdentityProvider.swift in Sources */,
 				1719C1462868CDCA0093915F /* CharacterDetailViewController.swift in Sources */,
 				17CFD7AE285B600B0008D9B8 /* HomeViewController.swift in Sources */,
 				17CFD7AA285B600B0008D9B8 /* AppDelegate.swift in Sources */,

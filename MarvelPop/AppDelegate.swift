@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let barButtonItemAppearance = UIBarButtonItem.appearance()
+        barButtonItemAppearance.tintColor = Tokens.Colors.accent
         barButtonItemAppearance.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
         return true
     }

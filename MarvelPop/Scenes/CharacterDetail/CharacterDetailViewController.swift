@@ -32,18 +32,29 @@ class CharacterDetailViewController: UIViewController {
                                   
     func setupHeaderView() {
         let container = UIView(frame: .zero)
-        [container, headerImage].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        let disclaimerLabel = UILabel(frame: .zero)
+        disclaimerLabel.textColor = Tokens.Colors.secondaryText
+        disclaimerLabel.font = .systemFont(ofSize: 10)
+        disclaimerLabel.textAlignment = .center
+        disclaimerLabel.text = "Data provided by Marvel. © 2014 Marvel"
+        [container, headerImage, disclaimerLabel].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         headerImage.contentMode = .scaleAspectFit
         
         container.addSubview(headerImage)
+        container.addSubview(disclaimerLabel)
         tableView.tableHeaderView = container
         
         NSLayoutConstraint.activate([
             headerImage.topAnchor.constraint(equalTo: container.topAnchor, constant: Tokens.Margin.medium),
-            headerImage.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -Tokens.Margin.large),
             headerImage.heightAnchor.constraint(equalToConstant: Tokens.Height.detailImage),
             headerImage.widthAnchor.constraint(equalTo: headerImage.heightAnchor),
             headerImage.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            
+            disclaimerLabel.topAnchor.constraint(equalTo: headerImage.bottomAnchor, constant: Tokens.Margin.small),
+            disclaimerLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: Tokens.Margin.medium),
+            disclaimerLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -Tokens.Margin.medium),
+            disclaimerLabel.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -Tokens.Margin.large),
+            
             container.centerXAnchor.constraint(equalTo: self.tableView.centerXAnchor)
         ])
         

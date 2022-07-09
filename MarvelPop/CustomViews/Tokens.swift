@@ -13,6 +13,7 @@ public enum Tokens {
         public static let background = UIColor.custom(secureName: "background")
         public static let accent = UIColor.custom(secureName: "accent")
         public static let primaryText = UIColor.custom(secureName: "primary-text")
+        public static let secondaryText = UIColor.custom(secureName: "secondary-text")
     }
 
     public enum Margin {

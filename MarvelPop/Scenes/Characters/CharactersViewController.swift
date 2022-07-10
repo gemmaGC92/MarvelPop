@@ -88,7 +88,7 @@ class CharactersViewController: UIViewController {
         tableView.delegate = self
         tableView.backgroundColor = .clear
         tableView.keyboardDismissMode = .onDrag
-        tableView.register(CharacterTableViewCell.self, forCellReuseIdentifier: CharacterTableViewCell.identifier)
+        tableView.register(BasicTableViewCell.self, forCellReuseIdentifier: BasicTableViewCell.identifier)
         
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -147,7 +147,7 @@ class CharactersViewController: UIViewController {
 // MARK: - UITableViewDataSource protocol implementation
 extension CharactersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier) as? CharacterTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.identifier) as? BasicTableViewCell else { return UITableViewCell() }
         cell.bind(title: items[indexPath.row].name ?? "", subtitle: items[indexPath.row].description)
         return cell
     }

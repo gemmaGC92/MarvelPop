@@ -66,7 +66,7 @@ class PublicationsListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .clear
-        tableView.register(CharacterTableViewCell.self, forCellReuseIdentifier: CharacterTableViewCell.identifier)
+        tableView.register(BasicTableViewCell.self, forCellReuseIdentifier: BasicTableViewCell.identifier)
         
         view.addSubview(tableView)
         
@@ -84,7 +84,7 @@ class PublicationsListViewController: UIViewController {
 // MARK: - UITableViewDataSource protocol implementation
 extension PublicationsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier) as? CharacterTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.identifier) as? BasicTableViewCell else { return UITableViewCell() }
         let item = items[indexPath.row]
         cell.bind(title: item.title ?? "", subtitle: item.description ?? "")
         return cell

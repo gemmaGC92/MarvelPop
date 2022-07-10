@@ -96,6 +96,7 @@ class CharacterDetailViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate protocol implementation
 extension CharacterDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch sections[indexPath.section] {
@@ -107,6 +108,7 @@ extension CharacterDetailViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UITableViewDataSource protocol implementation
 extension CharacterDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -120,6 +122,7 @@ extension CharacterDetailViewController: UITableViewDataSource {
             return ""
         }
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch sections[indexPath.section] {
         case .info(let model):
@@ -157,6 +160,7 @@ extension CharacterDetailViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - CharacterDetailViewOutput protocol implementation
 extension CharacterDetailViewController: CharacterDetailViewOutput {
     func showImage(_ img: UIImage) {
         headerImage.image = img

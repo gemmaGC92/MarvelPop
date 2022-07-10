@@ -81,6 +81,7 @@ class PublicationsListViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource protocol implementation
 extension PublicationsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier) as? CharacterTableViewCell else { return UITableViewCell() }
@@ -98,6 +99,7 @@ extension PublicationsListViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate protocol implementation
 extension PublicationsListViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let threshold: CGFloat = 50
@@ -110,7 +112,7 @@ extension PublicationsListViewController: UITableViewDelegate {
     }
 }
 
-
+// MARK: - PublicationsListViewOutput protocol implementation
 extension PublicationsListViewController: PublicationsListViewOutput {
     func showTitle(_ title: String) {
         navigationItem.title = title

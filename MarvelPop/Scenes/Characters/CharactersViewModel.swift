@@ -58,6 +58,7 @@ class CharactersViewModel {
         }
     }
     
+    /// TODO: Search enhancement: Store first request and check if the user has added more chars to the same searchTerm so it is not necessary to perform another request as the results will be in the previous response. In this scenario will be enough to filter the existing results. Just need to invalidate the previous response and preform a new one when the user deletes characters from the previous stored response.
     func filterCharacters(filter: String, offset: Int? = nil) {
         guard !isFetchingData else { return }
         isFetchingData = true
@@ -74,6 +75,7 @@ class CharactersViewModel {
     }
 }
 
+// MARK: - CharactersViewInput protocol implementation
 extension CharactersViewModel: CharactersViewInput {
     func exitSearchMode() {
         state = .data(marvelCharacters)

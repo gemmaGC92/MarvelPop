@@ -54,6 +54,7 @@ class PublicationsListViewModel {
     }
 }
 
+// MARK: - PublicationsListViewInput protocol implementation
 extension PublicationsListViewModel: PublicationsListViewInput {
     func loadMoreData() {
         guard let paging = paging else { return }

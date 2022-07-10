@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-class CharacterTableViewCell: UITableViewCell {
-    static let identifier = "CharacterTableViewCell"
+class BasicTableViewCell: UITableViewCell {
+    static let identifier = "BasicTableViewCell"
     
     let title = UILabel()
     let subtitle = UILabel()

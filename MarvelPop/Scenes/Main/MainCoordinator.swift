@@ -44,18 +44,21 @@ class MainCoordinator {
     }
 }
 
+// MARK: - HomeViewRouter protocol implementation
 extension MainCoordinator: HomeViewRouter {
     func onLetsGoTapped() {
         openCharactersList()
     }
 }
 
+// MARK: - CharactersRouter protocol implementation
 extension MainCoordinator: CharactersRouter {
     func showDetails(_ item: MarvelCharacter) {
         openCharacterDetails(item)
     }
 }
 
+// MARK: - CharacterDetailRouter protocol implementation
 extension MainCoordinator: CharacterDetailRouter {
     func showPublication(for id: Int, type: PublicationType) {
         openPublication(id: id, type: type)

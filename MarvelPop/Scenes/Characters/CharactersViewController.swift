@@ -87,6 +87,7 @@ class CharactersViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .clear
+        tableView.keyboardDismissMode = .onDrag
         tableView.register(CharacterTableViewCell.self, forCellReuseIdentifier: CharacterTableViewCell.identifier)
         
         NSLayoutConstraint.activate([
@@ -132,8 +133,18 @@ class CharactersViewController: UIViewController {
         super.viewDidLayoutSubviews()
         tableView.updateHeaderFooterTableView()
     }
+    
+    @objc func performSearch(searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else { return }
+        if searchText.isEmpty {
+            model?.exitSearchMode()
+        } else {
+            model?.search(searchText)
+        }
+    }
 }
 
+// MARK: - UITableViewDataSource protocol implementation
 extension CharactersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier) as? CharacterTableViewCell else { return UITableViewCell() }
@@ -150,6 +161,7 @@ extension CharactersViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate protocol implementation
 extension CharactersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         model?.didSelect(indexPath)
@@ -166,6 +178,7 @@ extension CharactersViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - CharactersViewOutput protocol implementation
 extension CharactersViewController: CharactersViewOutput {
     func update(_ state: CharactersViewState) {
         if loadAnimation.isPlaying {
@@ -197,16 +210,15 @@ extension CharactersViewController: CharactersViewOutput {
     }
 }
 
+// MARK: - UISearchBarDelegate protocol implementation
 extension CharactersViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            model?.exitSearchMode()
-        } else {
-            model?.search(searchText)
-        }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        model?.exitSearchMode()
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(performSearch), object: searchBar)
+        self.perform(#selector(performSearch), with: searchBar, afterDelay: 0.5)
     }
 }

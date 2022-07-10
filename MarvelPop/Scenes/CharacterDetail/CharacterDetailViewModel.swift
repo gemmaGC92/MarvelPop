@@ -82,6 +82,7 @@ class CharacterDetailViewModel {
     }
 }
 
+// MARK: - CharacterDetailViewInput protocol implementation
 extension CharacterDetailViewModel: CharacterDetailViewInput {
     func showPublication(type: PublicationType) {
         guard let id = marvelCharacter.id else { return }
